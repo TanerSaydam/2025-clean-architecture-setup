@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.1" />
     <PackageReference Include="TS.EntityFrameworkCore.GenericRepository" Version="9.0.1" />
   </ItemGroup>
 

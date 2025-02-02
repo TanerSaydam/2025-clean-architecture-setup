@@ -10,12 +10,19 @@ using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddResponseCompression(opt =>
+{
+    opt.EnableForHttps = true;
+});
+
 builder.AddServiceDefaults();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddCors();
 builder.Services.AddOpenApi();
-builder.Services.AddControllers().AddOData(opt =>
+builder.Services
+    .AddControllers()
+    .AddOData(opt =>
         opt
         .Select()
         .Filter()
@@ -24,7 +31,8 @@ builder.Services.AddControllers().AddOData(opt =>
         .OrderBy()
         .SetMaxTop(null)
         .AddRouteComponents("odata", AppODataController.GetEdmModel())
-);
+    )
+    ;
 builder.Services.AddRateLimiter(x =>
 x.AddFixedWindowLimiter("fixed", cfg =>
 {
@@ -42,6 +50,8 @@ app.MapScalarApiReference();
 
 app.MapDefaultEndpoints();
 
+app.UseHttpsRedirection();
+
 app.UseCors(x => x
 .AllowAnyHeader()
 .AllowCredentials()
@@ -50,8 +60,15 @@ app.UseCors(x => x
 
 app.RegisterRoutes();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.UseResponseCompression();
+
 app.UseExceptionHandler();
 
-app.MapControllers().RequireRateLimiting("fixed");
+app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
+
+ExtensionsMiddleware.CreateFirstUser(app);
 
 app.Run();

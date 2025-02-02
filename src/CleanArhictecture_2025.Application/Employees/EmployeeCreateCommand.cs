@@ -12,7 +12,8 @@ public sealed record EmployeeCreateCommand(
     DateOnly BirthOfDate,
     decimal Salary,
     PersonelInformation PersonelInformation,
-    Address? Address) : IRequest<Result<string>>;
+    Address? Address,
+    bool IsActive) : IRequest<Result<string>>;
 
 public sealed class EmployeeCreateCommandValidator : AbstractValidator<EmployeeCreateCommand>
 {
