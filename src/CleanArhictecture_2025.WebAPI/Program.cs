@@ -4,6 +4,7 @@ using CleanArhictecture_2025.Infrastructure;
 using CleanArhictecture_2025.WebAPI;
 using CleanArhictecture_2025.WebAPI.Controllers;
 using CleanArhictecture_2025.WebAPI.Modules;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
 using Microsoft.AspNetCore.RateLimiting;
 using Scalar.AspNetCore;
@@ -42,6 +43,16 @@ x.AddFixedWindowLimiter("fixed", cfg =>
     cfg.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
 }));
 builder.Services.AddExceptionHandler<ExceptionHandler>().AddProblemDetails();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer();
+builder.Services.AddAuthorization();
+
+//builder.Services.AddKeycloakWebApiAuthentication(builder.Configuration);
+//builder.Services.AddAuthorization().AddKeycloakAuthorization(builder.Configuration);
 
 var app = builder.Build();
 

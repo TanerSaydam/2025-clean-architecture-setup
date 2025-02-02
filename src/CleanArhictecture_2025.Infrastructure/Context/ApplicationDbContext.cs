@@ -1,4 +1,5 @@
-﻿using CleanArhictecture_2025.Domain.Abstractions;
+﻿using System.Security.Claims;
+using CleanArhictecture_2025.Domain.Abstractions;
 using CleanArhictecture_2025.Domain.Employees;
 using CleanArhictecture_2025.Domain.Users;
 using GenericRepository;
@@ -31,7 +32,14 @@ internal sealed class ApplicationDbContext : IdentityDbContext<AppUser, Identity
         var entries = ChangeTracker.Entries<Entity>();
 
         HttpContextAccessor httpContextAccessor = new();
-        string userIdString = httpContextAccessor.HttpContext!.User.Claims.First(p => p.Type == "user-id").Value;
+        string userIdString =
+            httpContextAccessor
+            .HttpContext!
+            .User
+            .Claims
+            .First(p => p.Type == ClaimTypes.NameIdentifier)
+            .Value;
+
         Guid userId = Guid.Parse(userIdString);
 
         foreach (var entry in entries)

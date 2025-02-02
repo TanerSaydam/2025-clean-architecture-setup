@@ -1,8 +1,8 @@
 ﻿using CleanArhictecture_2025.Domain.Users;
 using CleanArhictecture_2025.Infrastructure.Context;
 using CleanArhictecture_2025.Infrastructure.Options;
+using CleanArhictecture_2025.Infrastructure.Services;
 using GenericRepository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -39,13 +39,10 @@ public static class InfrastructureRegistrar
 
         services.Configure<JwtOptions>(configuration.GetSection("Jwt"));
         services.ConfigureOptions<JwtOptionsSetup>();
+        services.Configure<KeycloakConfiguration>(configuration.GetSection("KeycloakConfiguration"));
 
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        }).AddJwtBearer();
-        services.AddAuthorization();
+        services.AddScoped<KeycloakService>();
+        //services.AddScoped<IJwtProvider, KeycloakService>();           
 
         services.Scan(opt => opt
         .FromAssemblies(typeof(InfrastructureRegistrar).Assembly)

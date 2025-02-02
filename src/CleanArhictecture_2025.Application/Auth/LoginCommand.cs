@@ -50,7 +50,7 @@ internal sealed class LoginCommandHandler(
             return (500, "Şifreniz yanlış");
         }
 
-        var token = await jwtProvider.CreateTokenAsync(user, cancellationToken);
+        var token = await jwtProvider.CreateTokenAsync(user, request.Password, cancellationToken);
 
         var response = new LoginCommandResponse()
         {

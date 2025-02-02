@@ -11,11 +11,11 @@ namespace CleanArhictecture_2025.Infrastructure.Services;
 internal sealed class JwtProvider(
     IOptions<JwtOptions> options) : IJwtProvider
 {
-    public Task<string> CreateTokenAsync(AppUser user, CancellationToken cancellationToken = default)
+    public Task<string> CreateTokenAsync(AppUser user, string password, CancellationToken cancellationToken = default)
     {
         List<Claim> claims = new()
         {
-            new Claim("user-id",user.Id.ToString())
+            new Claim(ClaimTypes.NameIdentifier,user.Id.ToString())
         };
 
         var expires = DateTime.Now.AddDays(1);

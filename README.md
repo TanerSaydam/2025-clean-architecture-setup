@@ -30,3 +30,8 @@ https://youtube.com/live/byiN2UZXXJQ
    ```bash
    git clone https://github.com/tanersaydam/2025-clean-architecture-setup.git
    cd 2025-clean-architecture-setup
+
+2. **Keycloak Docker Kodu**:
+   ```bash
+    docker run -d --name keycloak -p 8080:8080 -e KEYCLOAK_ADMIN=admin -e KEYCLOAK_ADMIN_PASSWORD=admin quay.io/keycloak/keycloak:25.0.2 start-dev
+   ```
