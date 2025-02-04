@@ -25,6 +25,8 @@ Bu repoda, 2025 yılı için projelerimizde başlangıç olarak kullanabileceği
 - **EntityFrameworkCore**: ORM (Object-Relational Mapping) için.
 - **OData**: Sorgulama ve veri erişiminde esneklik sağlamak için.
 - **Scrutor**: Dependency Injection yönetimi ve dinamik servis kaydı için.
+- **Microsoft.AspNetCore.Authentication.JwtBearer**: Authentication yönetimi için
+- **Keycloak.AuthServices.Authentication**: Keyloak ile Authentication yönetimi için
 
 ## Kurulum ve Kullanım
 1. **Depoyu Klonlayın**:
