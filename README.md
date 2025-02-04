@@ -4,7 +4,7 @@ Bu repoda, 2025 yılı için projelerimizde başlangıç olarak kullanabileceği
 
 ## Video Linki:
 1. https://youtube.com/live/byiN2UZXXJQ
-2. https://www.youtube.com/live/kFiBEheyNOw?si=-wteHAU8XiHa6qwx
+2. https://youtube.com/live/kFiBEheyNOw
 
 ## Proje İçeriği
 
