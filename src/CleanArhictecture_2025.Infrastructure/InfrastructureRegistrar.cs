@@ -16,7 +16,7 @@ public static class InfrastructureRegistrar
     {
         services.AddDbContext<ApplicationDbContext>(opt =>
         {
-            string connectionString = configuration.GetConnectionString("SqlServer")!;
+            string connectionString = configuration.GetConnectionString("AppConnectionString")!;
             opt.UseSqlServer(connectionString);
         });
 
