@@ -26,8 +26,6 @@ public static class ExtensionsMiddleware
                 user.CreateUserId = user.Id;
 
                 userManager.CreateAsync(user, "1").Wait();
-
-
             }
         }
     }

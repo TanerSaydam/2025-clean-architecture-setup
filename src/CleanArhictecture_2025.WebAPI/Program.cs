@@ -1,3 +1,4 @@
+using CleanArhictecture_2025.WebAPI;
 using CleanArhictecture_2025.WebAPI.Installers;
 using CleanArhictecture_2025.WebAPI.Modules;
 using Scalar.AspNetCore;
@@ -16,9 +17,9 @@ app.MapOpenApi();
 
 app.MapScalarApiReference();
 
-app.MapDefaultEndpoints();
-
 app.AddMiddlewares();
+
+app.MapDefaultEndpoints();
 
 app.MapControllers().RequireRateLimiting("fixed").RequireAuthorization();
 
